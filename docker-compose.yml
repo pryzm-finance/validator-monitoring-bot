@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  validator_daily:
+    build:
+      context: ./src/
+      dockerfile: Dockerfile
+    volumes:
+       - ./src:/app
+    command: /bin/bash -c "cron -f"
+    networks:
+      - validator
+  
+  validator_monitor:
+    build:
+      context: ./src/
+      dockerfile: Dockerfile
+    volumes:
+       - ./src:/app
+    command: python -u monitor.py
+    networks:
+      - validator
+
+networks:
+  validator:
+    name: validator
+    driver: bridge
+    ipam:
+        config:
+           - subnet: 172.16.58.0/24
