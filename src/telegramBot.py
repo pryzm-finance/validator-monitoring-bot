@@ -19,7 +19,7 @@ def sendmessage(msg):
     except Exception as e:
         print("Error Sending telegram message")
         
-def sendmessage_moein(msg):
+def sendmessage_verbose(msg):
     try:
         sendlink = "{}/sendMessage?chat_id={}&text={}".format(link,verbose_chat_id,msg)
         # print(sendlink+msg)
@@ -39,7 +39,7 @@ def botMsg(msg):
 
 def verboseMsg(msg):
     if (len(msg) > 0):
-        sendmessage_moein(prepare_msg(str(msg)))
+        sendmessage_verbose(prepare_msg(str(msg)))
 
 def getNow():
     return int(datetime.now().timestamp())

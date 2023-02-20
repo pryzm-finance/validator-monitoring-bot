@@ -1,7 +1,7 @@
 import random
 
 import time
-from telegramBot import botMsg,MoeinMsg
+from telegramBot import botMsg,verboseMsg
 from functions import getNow, getTimeFromTimestamp,getTime, manage_exception,print_and_save_error,get_updated_proposal_ids,get_proposal_response,get_hourly_block_stats,get_config_dict
 
 
@@ -81,9 +81,9 @@ def main_function():
         global all_stats
         global initialized
         if(initialized == 0):
-            MoeinMsg("Monitoring service started at {}".format(getTimeFromTimestamp(getNow())))
+            verboseMsg("Monitoring service started at {}".format(getTimeFromTimestamp(getNow())))
             all_stats=initialize_stats()
-            MoeinMsg(str(all_stats))
+            verboseMsg(str(all_stats))
         initialized=1
         count=0
         start_time=getTime()
@@ -91,7 +91,7 @@ def main_function():
             try:
                 count+=1
                 if count%100==1:
-                    MoeinMsg("Count: {}\nstart_time: {}\n#count".format(count,start_time))
+                    verboseMsg("Count: {}\nstart_time: {}\n#count".format(count,start_time))
                 try:
                     controller_hourly_block_stats(all_stats['hourly'])
                 except Exception as e:
@@ -107,7 +107,7 @@ def main_function():
                 #   controller_integrity_check_params
                 
                 if int(random.randint(0,10))==1:
-                    MoeinMsg(str(all_stats))
+                    verboseMsg(str(all_stats))
                 time.sleep(30)
             except Exception as e:
                 manage_exception(e)

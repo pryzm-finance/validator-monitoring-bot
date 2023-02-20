@@ -1,7 +1,7 @@
 from datetime import datetime
 import time
 from configparser import ConfigParser
-from telegramBot import MoeinMsg
+from telegramBot import verboseMsg
 import traceback
 import requests
 
@@ -67,17 +67,17 @@ def manage_exception(e):
         # print(stackTrace)
         content = "\n*****\n✓✓✓✓✓✓Start: <Handled_Exception> @ ({})\nStacktrace: \n{}\n✓✓✓✓✓✓End: </Handled_Exception>\n\n".format(getTime(), stackTrace)
         # write_into_file("error_logs", content, append_bool=True)
-        MoeinMsg(content)
+        verboseMsg(content)
     except:
-        MoeinMsg("Failed to send manage exception message")
+        verboseMsg("Failed to send manage exception message")
     
 def print_and_save_error(error_msg):
     try:
         return_msg="\nStart: <My_Details> @ ({})\n\t{}\nEnd: </My_Details>\n".format(getTime(),error_msg)
         # write_into_file("error_logs", return_msg, append_bool=True)
-        MoeinMsg(return_msg)
+        verboseMsg(return_msg)
     except:
-        MoeinMsg("Failed to send print_and_save_error message")
+        verboseMsg("Failed to send print_and_save_error message")
 
 
 #Monitoring functions
@@ -108,7 +108,7 @@ def get_proposal_response(validator_name,count=0):
                 print("key: {} not in response:\n\t{}".format(key,resp_json))
                 time.sleep(count)
                 if count>max and count%max==0:
-                    MoeinMsg("{} unsuccessful tries to fetch data".format(count))
+                    verboseMsg("{} unsuccessful tries to fetch data".format(count))
                 return get_proposal_response(validator_name,count=count)
         return resp_json
     except Exception as e:
@@ -117,7 +117,7 @@ def get_proposal_response(validator_name,count=0):
         print_and_save_error("get_proposal_response exception of validator: {}".format(validator_name))
         time.sleep(5)
         if count>max and count%max==0:
-            MoeinMsg("{} unsuccessful tries to fetch data".format(count))
+            verboseMsg("{} unsuccessful tries to fetch data".format(count))
         return get_proposal_response(validator_name,count=count)
 
 
@@ -149,7 +149,7 @@ def get_external_response(count=0):
                 print("key: {} not in response:\n\t{}".format(key,resp_json))
                 time.sleep(count)
                 if count>max and count%max==0:
-                    MoeinMsg("{} unsuccessful tries to fetch data".format(count))
+                    verboseMsg("{} unsuccessful tries to fetch data".format(count))
                 return get_external_response(count=count)
         return resp_json
     except Exception as e:

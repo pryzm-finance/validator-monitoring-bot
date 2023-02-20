@@ -1,6 +1,6 @@
 import requests
 import datetime
-from telegramBot import botMsg,MoeinMsg
+from telegramBot import botMsg,verboseMsg
 from functions import get_config_dict,manage_exception,print_and_save_error,get_updated_proposal_ids,get_proposals_votes_url,get_proposal_details
     
 
